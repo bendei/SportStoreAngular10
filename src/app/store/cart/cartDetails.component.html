@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">SPORTS STORE
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        <div class="mt-2">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="cart.lines.length == 0">
+                        <td class="text-center" colspan="4">Youe cart is empty</td>
+                    </tr>
+
+                    <!-- !! figyelem, itt nincsen form elem!! -->
+                    <tr *ngFor="let line of cart.lines">
+                        <td>
+                            <input type="number" class="form-control" [value]="line.quantity" 
+                            (change)="cart.updateQuantity($event.target.value, line.product.id)"/>
+                        </td>
+                        <td>
+                            {{line.product.name}}
+                        </td>
+                        <td>
+                            {{line.product.price | currency: "USD"}}
+                        </td>
+                        <td>
+                            {{line.product.price * line.quantity}}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" (click)="cart.removeLine(line.product.id)">
+                                Remove
+                            </button>                            
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot *ngIf="cart.lines.length != 0">
+                    <tr>
+                        <td colspan="3">
+                            TotaL:
+                        </td>
+                        <td>
+                            {{cart.cartPrice}}
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>  
+    </div>
+
+    <div class="row">
+        <div class="col">
+        <div class="text-center">
+        <button class=" btn btn-primary m-1" routerLink="/store/home">Continue shopping</button>
+        <button class=" btn btn-secondary m-1" routerLink="/store/checkout">Checkout</button>
+    </div>
+    </div>
+
+    </div>
+
+</div>

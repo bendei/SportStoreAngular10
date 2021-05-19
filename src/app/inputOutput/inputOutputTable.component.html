@@ -1,0 +1,32 @@
+<div class="m-2">
+    
+    <table class="table table-striped">
+        <thead>
+            <th></th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Release Date</th>
+        </thead>
+        <tr *ngFor="let p of products; let odd = odd; let first = first; let last = last; let i = index" [class.bg-secondary]="odd" [class.text-white]="odd" [class.bg-warning]="first"
+        [class.bg-danger]="last" [class.text-white]="last" (click)="sendProductToParent(p)">
+                <td>{{i}}</td>
+                <td>{{p.name}}</td>
+                <td>{{p.category}}</td>
+                <td>{{p.price}}</td>
+                <td>
+                    <!-- core.js:6185 ERROR Error: InvalidPipeArgument: 'Missing locale data for the locale "hu".' for pipe 'DatePipe'
+                        mert a hu locale le kell tölteni: We need to register the locale information. ott van a compban-->
+                    Local: {{p.releaseDate | date:'medium'}}
+                    <br/>
+                    UTC: {{p.releaseDate | date:'short':'UTC'}}
+
+                </td>
+            </tr>
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+</div>

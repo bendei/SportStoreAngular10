@@ -1,0 +1,59 @@
+<div class="m-2">
+    <form class="fo" [formGroup]="bookForm" (ngSubmit)="submitForm()">
+        <div class="form-group">
+            <label>ISBN:</label>
+            <input type="text" formControlName="isbn" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Title:</label>
+            <input type="text" formControlName="title" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Subtitle:</label>
+            <input type="text" formControlName="subtitle" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Rating:</label>
+            <input type="text" formControlName="rating" class="form-control">
+        </div>
+
+        <!-- <div class="form-group">
+            <label>Published:</label>
+            <input type="date" formControlName="published" useValueAsDate class="form-control">
+        </div> -->
+
+
+        <!-- <div class="form-group">
+            <label>Authors</label>
+            <div formArrayName="authors" *ngFor="let au of bookForm.get('authors')['controls']; let in = index;">
+                {{au.value}}
+                <input formControlName="in" placeholder={{au.value}}>
+            </div>
+        </div> -->
+
+        <button type="button" class="btn  btn-block btn-outline-secondary mb-3"  [style.max-width.px]="180"  (click)="addSeller()">Add new Seller</button>
+
+       <div class="from-group" *ngIf="book?.sellers">      <!--  nem biztos hogy a jsonban van ilyen property -->
+            <label>Sellers:</label>
+                <div formArrayName="sellers" *ngFor="let item of bookForm.get('sellers')['controls']; let i = index;">
+
+                    <div [formGroupName]="i">
+                        <input class="m-2" formControlName="name" >
+                        <input class="m-2" formControlName="address">
+                        <input class="m-2"formControlName="quantity">
+                      </div>
+                    </div>
+        </div>
+
+        <button type="submit" class="btn  btn-block btn-outline-primary mb-3"  [style.max-width.px]="180" [disabled]="bookForm.invalid">Submit</button>
+        <button class="btn  btn-block btn-outline-secondary mb-3"  [style.max-width.px]="180" routerLink="/book/list">Back</button>
+
+
+    </form>
+
+
+
+</div>

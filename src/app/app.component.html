@@ -1,0 +1,29 @@
+<div class="container-fluid full-height">
+  <div class="row">
+  <div class="col-2 ull-height">
+
+    <button class="btn btn-block btn-primary mb-2" routerLink="/book/list" [style.max-width.px]="180">
+      Books
+    </button>
+
+    <button class="btn btn-block btn-primary mb-2" routerLink="/store/home" [style.max-width.px]="180">
+      Product Store
+    </button>
+
+    <button class="btn btn-block btn-primary mb-2" routerLink="/admin/home" [style.max-width.px]="180">
+      Product Admin
+    </button>
+
+    <button class="btn btn-block btn-primary mb-2" routerLink="/inputoutput/home" [style.max-width.px]="180">
+      Input Output
+    </button>
+
+  </div>
+
+  <div class="col-10 full-height">
+    <router-outlet></router-outlet> 
+  </div>
+</div>
+
+
+</div>

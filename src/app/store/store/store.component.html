@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">SPORTS STORE
+            <cart-summary ></cart-summary>
+           
+        </div>
+    </div>
+
+    <div class="row">
+       
+        <div class="col-2 bg-info text-white">
+            <h4>{{categories.length}} Categories</h4>
+              
+               <button [ngStyle]="{'max-width.px': '180'}" class="btn btn-block btn-outline-prinmary border 1" (click)="changeCategory()" >Home</button>
+
+<!-- alternative syntax by setting elements attribute -->
+               <button 
+                    [ngStyle]="{'max-width.px': '180', 'background-color': 'white'}" 
+                    [ngClass]="{'bg-success': cat == selectedCategory}"
+                    [style.font-size.px]="20"
+                    [ngClass] = "{
+                        'text-success':cat === 'category 1',
+                        'text-info': cat === 'category 2',
+                        'text-secondary': cat === 'category 3'
+                    }"
+                    class="btn btn-block btn-outline-prinmary border 1"
+                    *ngFor="let cat of categories" (click)="changeCategory(cat)" 
+                   >
+                        {{cat}}
+               </button>
+
+               <!-- <button class="btn btn-block btn-danger" routerLink="/admin/main" [style.max-width.px]="180">
+                    Admin
+               </button>
+
+               <button class="btn btn-block btn-primary mb-2" routerLink="/books" [style.max-width.px]="180">
+                    Books
+                </button>
+
+
+               <button class="btn btn-block btn-primary mb-2" routerLink="/reactiveForm" [style.max-width.px]="180">
+                    Reactive Form
+                </button>
+
+               <button class="btn btn-block btn-primary mb-2" routerLink="/productForm" [style.max-width.px]="180">
+                   Product Form
+               </button>
+
+               <button class="btn btn-block btn-primary mb-2" routerLink="/simpleForm" [style.max-width.px]="180">
+                Simple Form
+            </button>
+
+            <button class="btn btn-block btn-primary mb-2" routerLink="/componentForm" [style.max-width.px]="180">
+                Component Form
+            </button>
+
+            <button class="btn btn-block btn-primary mb-2" routerLink="/inputOutput" [style.max-width.px]="180">
+                @Input @Output
+            </button> -->
+
+        </div>
+
+<!-- mivel itt a products array- megyek végig , ezért a StoreComponent get products(): Product[] -t újra meghivja -->
+        <div class="col-10 bg-success text-white">
+
+            <div *ngIf="!getProducts()">Daten werden geladen...</div>
+
+              <div *ngFor="let product of getProducts()" class="card bg-light  m-1 text-info">
+                    <span>
+                    <h6>{{product.name}}
+                        <span class="badge badge-pill badge-primary float-right">
+                            {{product.price | currency: "HUF":"symbol":"2.2-2"}}
+                        </span>
+                    </h6>
+                 
+                </span>
+                <div class="card-text text-secondary">
+                    {{product.category}} <br>
+                    {{product.description}}
+                    <button class="btn btn-success btn-sm float-right" (click)="addProductToCart(product)">
+                        Add to cart
+                    </button>
+                </div>
+               
+              </div>
+        </div>
+    </div>
+
+    <div class="float-left">
+        <select class="form-control" [value]="poructsPerPage" (change)="changePoructsPerPage($event.target.value)">
+            <option value="3">3 darab</option>
+            <option value="4">4 darab</option>
+            <option value="5">5 darab</option>
+        </select>
+    </div>
+
+    <!-- PROBLEM az a baj, hogy ha pageSizet a selectbol változtatom a pagelö gombok nem updateoldnek -->
+    <div class="btn-group float-right">
+        <button *ngFor="let page of numberOfPages"  class="btn btn-outline-prinmary border 1" (click)="changePage(page)">
+            {{page}}
+            
+        </button>
+    </div>
+</div>

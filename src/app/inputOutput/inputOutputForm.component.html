@@ -1,0 +1,47 @@
+<div class="m-2">
+
+   <h4>Template driven form with custom validator and @Input/@Output</h4>
+   Use cases:
+   <ul>
+        <li>A form kitöltésével és submitálásával egy új product jön létre,ami a táblázatban megjelenítésre kerül</li>
+        <li>A táblázat egy sorára kattintva a product értékei átadásra kerülnek a form mezőinek</li>
+        <li>A form custom validátort használ ( https://www.tektutorialshub.com/angular/custom-validator-in-template-driven-forms-in-angular/)</li>
+   </ul>
+
+   <form novalidate #form="ngForm" (submit)="submit(form)" >
+        
+        <div class="form-group">
+            <label>Name:</label>
+            <input class="form-control" #name="ngModel" name="name" [(ngModel)]="newProduct.name">
+        </div>
+
+        <!-- legyen dropdown a categoriakbol -->
+        <div class="form-group">
+            <label>Category:</label>
+           <select class="form-control"  #name="ngModel" name="category" [(ngModel)]="newProduct.category" >
+                <option *ngFor="let cat of categories; let i = index" [value]="cat" > {{cat}}</option>  
+                    <!-- [attr.selected]="i==0" >{{i} -->
+           </select>
+
+        </div>
+
+        <!-- csak number lehessen -->
+        <div class="form-group">
+            <label>Price</label>
+            <input class="form-control" name="price" #name="ngModel" [(ngModel)]="newProduct.price" type="number">
+        </div>
+
+       
+        <button type="button" class="btn btn-primary"  (click)="simpleClicked()"   >
+              Simple demo
+        </button>
+          
+        <button class="btn btn-block btn-secondary m-2" [style.max-width.px]="180" type="submit">Create new Product</button>
+
+    </form>
+
+    <!-- ne tedd a form on belülre mert akkor a submit() is végrehajtódik mindig a clearForm után!! -->
+    <button class="btn btn-block btn-secondary m-2" [style.max-width.px]="180" (click)="clearForm(form)">Clear form</button>
+
+
+</div>

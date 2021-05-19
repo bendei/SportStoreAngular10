@@ -1,0 +1,27 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">SPORTS STORE</a>
+            </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <button class="btn btn-block btn-outline-danger" routerLink="/admin/main/productTable" [style.max-width.px]="180">
+                Products
+           </button>
+           <button class="btn btn-block btn-outline-danger" routerLink="/admin/main/orderTable" [style.max-width.px]="180">
+                Orders
+            </button>
+            <button class="btn btn-block btn-outline-secondary" routerLink="/store/home" [style.max-width.px]="180">Back</button>
+        </div>
+
+        <div class="col-9">
+            <!-- a children routok componentjeit ide tölti be, lásd: admin module path main -->
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+
+</div>

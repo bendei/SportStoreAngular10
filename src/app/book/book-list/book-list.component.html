@@ -1,0 +1,13 @@
+<app-book-list-item *ngFor="let item of books; let i = index;" [book] = "item" [index] = "i"></app-book-list-item>
+
+
+<div *ngIf="!books" class="spinner-border" role="status">
+</div>
+
+<div *ngIf="books && !books.length" >
+     Es wurden noch keine Bücher eingetragen!
+</div>
+
+<div>
+    <button class="btn btn-block btn-secondary m-2" [style.max-width.px]="180"  [routerLink]="['/book/details', ModesEnum.create]">Create new book</button>
+</div>

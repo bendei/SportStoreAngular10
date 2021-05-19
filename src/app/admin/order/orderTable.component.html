@@ -1,0 +1,41 @@
+<div class="form-check">
+    <input type="checkbox" class="form-check-input" [(ngModel)]="onlyShipped" >
+    <label>Display shipped orders only</label>
+</div>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Shipped</th>
+            <th>Cart</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of getOrders()">
+            <td>{{order.name}}</td>
+            <td>{{order.city}}</td>
+            <td><input type="checkbox" class="form-check-input" [(ngModel)]="order.shipped" disabled></td>
+            <td><b>Product</b>
+                <br/>
+                <div *ngFor="let cartline of order.cart.lines">
+                    {{cartline.product.name}}
+                </div>
+            </td>
+            <td><b>Quantity</b>
+                <br/>
+                <div *ngFor="let cartline of order.cart.lines">
+                    {{cartline.quantity}}
+                </div>
+            </td>
+            <td><button class="btn btn-warning m1" (click)="markShipped(order)">Ship</button></td>
+            <td><button class="btn btn-danger" (click)="deleteOrder(order.id)">Delete</button></td>
+        </tr>
+
+    </tbody>
+
+</table>
