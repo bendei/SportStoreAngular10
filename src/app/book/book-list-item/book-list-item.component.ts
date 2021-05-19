@@ -21,6 +21,7 @@ export class BookListItemComponent {
   constructor(private router: Router) { }
 
   selectBook(selectedBook: Book) {
+    console.log("dsdasd");
     this.router.navigateByUrl("/book/details");
   }
 

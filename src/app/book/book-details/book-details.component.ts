@@ -54,6 +54,7 @@ export class BookDetailsComponent implements OnInit {
   }
 
   createSellerGroups(sellers: BookSeller[]): FormGroup[] {
+    console.log("wwww");
     let sellerGroups: FormGroup[] = [];
 
     sellers.forEach(s => {
