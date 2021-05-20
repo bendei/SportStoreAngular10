@@ -31,14 +31,11 @@ export class BookDetailsComponent implements OnInit {
                                                      // hivás eredményét
         this.book = data;
         this.initForm(this.book);
-    
       })
     } 
-
   }
 
   private initForm(book?: Book): void {
-  
     this.bookForm = this.fb.group({
       isbn: [book?.isbn, Validators.required],
       id: [book?.isbn],
@@ -46,7 +43,6 @@ export class BookDetailsComponent implements OnInit {
       subtitle: [book?.subtitle],
       published: [book?.published],
       rating: [book?.rating],
-      authors: this.fb.array(["q","w"]),
       //sellers: (book === undefined || book.sellers === undefined )? [] : this.fb.array(this.createSellerGroups(book?.sellers))
       // vagy ugyanez 
        sellers: this.fb.array( (!book || !book?.sellers) ? [] : this.createSellerGroups(book.sellers) ) // array of FormControll objects
@@ -55,13 +51,11 @@ export class BookDetailsComponent implements OnInit {
 
   createSellerGroups(sellers: BookSeller[]): FormGroup[] {
     let sellerGroups: FormGroup[] = [];
-
     sellers.forEach(s => {
       sellerGroups.push(
         this.createSellerGroup(s)
       );
     });
-
     return sellerGroups;
   }
 
@@ -74,12 +68,13 @@ export class BookDetailsComponent implements OnInit {
   }
 
   addSeller() {
-    let sellers = this.bookForm.get("sellers") as FormArray;
+    const sellers = this.bookForm.get("sellers") as FormArray;
     sellers.push(this.createSellerGroup());
   }
 
-  deleteSeller(index: string ) {
-    console.log(index);
+  deleteSeller(index: number ) {
+    const sellers = this.bookForm.get("sellers") as FormArray;
+    sellers.removeAt(index);
   }
 
   submitForm() {

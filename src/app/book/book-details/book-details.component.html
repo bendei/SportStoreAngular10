@@ -34,7 +34,7 @@
             </div>
         </div> -->
 
-        <button type="button" class="btn  btn-block btn-outline-secondary mb-3"  [style.max-width.px]="180"  (click)="addSeller()">Add new Seller</button>
+        <button type="button" class="btn btn-secondary m-1"  [style.max-width.px]="180"  (click)="addSeller()">Add new Seller</button>
 
         <div *ngIf="book?.sellers">
             <!-- Fejléc -->
@@ -64,9 +64,8 @@
                     <div class="col-2">
                          <input formControlName="quantity" >
                     </div>
-                    <div class="col-2">
-                       
-                            <button type="button"  [style.max-width.px]="120" (click)="deleteSeller(i)">Delete Seller</button>
+                    <div class="col-2">                       
+                            <button type="button" class="btn btn-secondary" [style.max-width.px]="120" (click)="deleteSeller(i)">Delete Seller</button>
                     </div>
                 </div>
             </div>
@@ -74,8 +73,8 @@
 
 
         <div class="row">
-            <button type="submit" class="btn  btn-block btn-outline-primary mb-3"  [style.max-width.px]="180" [disabled]="bookForm.invalid">Submit</button>
-            <button type="button" class="btn  btn-block btn-outline-primary mb-3"  [style.max-width.px]="180" routerLink="/book/list">Back</button>
+            <button type="submit" class="btn btn-primary m-1"  [style.max-width.px]="180" [disabled]="bookForm.invalid">Submit</button>
+            <button type="button" class="btn btn-primary m-1"  [style.max-width.px]="180" routerLink="/book/list">Back</button>
         </div>
 
     </form>
