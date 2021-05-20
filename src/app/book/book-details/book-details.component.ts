@@ -24,8 +24,8 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit(): void {
    this.initForm();  // meg kell hivni mert a template már renderelve lehet mire a REST response megjön és a [fromGroup] egy undefined objectre mutat
-    //this.bookForm = this.fb.group({});
-    if (this.modes === Modes.edit) {
+
+   if (this.modes === Modes.edit) {
       const id = this.activeRoute.snapshot.paramMap.get("id");
       this.bookRepo.getBook(id).subscribe(data =>  {  // a subscription ban kell a formgroupot inicializálni, mert meg kell várni a async REST
                                                      // hivás eredményét
@@ -49,7 +49,7 @@ export class BookDetailsComponent implements OnInit {
       authors: this.fb.array(["q","w"]),
       //sellers: (book === undefined || book.sellers === undefined )? [] : this.fb.array(this.createSellerGroups(book?.sellers))
       // vagy ugyanez 
-       sellers: this.fb.array( (!book || !book?.sellers) ? [] : this.createSellerGroups(book.sellers) )
+       sellers: this.fb.array( (!book || !book?.sellers) ? [] : this.createSellerGroups(book.sellers) ) // array of FormControll objects
     });
   }
 
@@ -78,14 +78,21 @@ export class BookDetailsComponent implements OnInit {
     sellers.push(this.createSellerGroup());
   }
 
+  deleteSeller(index: string ) {
+    console.log(index);
+  }
+
   submitForm() {
+
     if(this.bookForm.valid) {
 
-      const ez = this.bookForm.value;
+      // kiszűrni ha a user üres seller sorokat adott hozzá
+     const sellers = this.bookForm.value.sellers.filter((seller: BookSeller) => (seller.address != null && seller.name != null && seller.quantity != 0));
 
       const mybook: Book = {
         ...this.bookForm.value,
-        id: this.bookForm.get("isbn").value
+        id: this.bookForm.get("isbn").value,
+        sellers
       };
 
       if(this.modes == Modes.edit) {

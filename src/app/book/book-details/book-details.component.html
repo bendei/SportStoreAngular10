@@ -1,5 +1,5 @@
 <div class="m-2">
-    <form class="fo" [formGroup]="bookForm" (ngSubmit)="submitForm()">
+    <form class="form" [formGroup]="bookForm" (ngSubmit)="submitForm()">
         <div class="form-group">
             <label>ISBN hahahah Hotfix 1 v1.1:</label>
             <input type="text" formControlName="isbn" class="form-control">
@@ -36,21 +36,47 @@
 
         <button type="button" class="btn  btn-block btn-outline-secondary mb-3"  [style.max-width.px]="180"  (click)="addSeller()">Add new Seller</button>
 
-       <div class="from-group" *ngIf="book?.sellers">      <!--  nem biztos hogy a jsonban van ilyen property -->
-            <label>Sellers:</label>
-                <div formArrayName="sellers" *ngFor="let item of bookForm.get('sellers')['controls']; let i = index;">
+        <div *ngIf="book?.sellers">
+            <!-- Fejléc -->
+            <div class="row  gy-1" >   <!--  nem biztos hogy a jsonban van ilyen property -->
+                <div class="col-2">
+                    Name
+                </div>
+                <div class="col-2">
+                    Address
+                </div>
+                <div class="col-2">
+                    Quantity
+                </div>
+                <div class="col-2">
+                    &nbsp;
+                </div>           
+            </div>
 
-                    <div [formGroupName]="i">
-                        <input class="m-2" formControlName="name" >
-                        <input class="m-2" formControlName="address">
-                        <input class="m-2"formControlName="quantity">
-                      </div>
+            <div formArrayName="sellers" *ngFor="let seller of bookForm.get('sellers')['controls']; let i = index;">    <!-- a sellers FormArray-n mint FormControll elemeket iterálunk végig -->
+                <div [formGroupName]="i" class="row gy-1 mb-2">
+                    <div class="col-2">
+                         <input formControlName="name" >
                     </div>
+                    <div class="col-2">
+                         <input formControlName="address" >
+                    </div>
+                    <div class="col-2">
+                         <input formControlName="quantity" >
+                    </div>
+                    <div class="col-2">
+                       
+                            <button type="button"  [style.max-width.px]="120" (click)="deleteSeller(i)">Delete Seller</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <button type="submit" class="btn  btn-block btn-outline-primary mb-3"  [style.max-width.px]="180" [disabled]="bookForm.invalid">Submit</button>
-        <button class="btn  btn-block btn-outline-secondary mb-3"  [style.max-width.px]="180" routerLink="/book/list">Back</button>
 
+        <div class="row">
+            <button type="submit" class="btn  btn-block btn-outline-primary mb-3"  [style.max-width.px]="180" [disabled]="bookForm.invalid">Submit</button>
+            <button type="button" class="btn  btn-block btn-outline-primary mb-3"  [style.max-width.px]="180" routerLink="/book/list">Back</button>
+        </div>
 
     </form>
 
