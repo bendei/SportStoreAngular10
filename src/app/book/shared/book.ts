@@ -4,7 +4,7 @@ export interface Book {
     id: string;
     isbn: string;
     title: string;
-    authors: Author[];
+    authors: string[];
     sellers: BookSeller[];
     published: Date;
     subtitle?: string;
