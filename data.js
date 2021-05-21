@@ -31,7 +31,7 @@ module.exports = function () {
                     {name: 'Sasform Agrotechnika Kft.', address: 'Felsőszéktó 86', quantity: 12000}
                     ],
                 title: "Angular 11", 
-                authors: [{author: 'Ferdinand Malcher'}, {author:'Johannes Hoppe'}, {author:'Danny Koppenhagen'}], 
+                authors: ['Ferdinand Malcher', 'Johannes Hoppe', 'Danny Koppenhagen'], 
                 published: new Date(2020, 8, 1), subtitle: 'Grundlagen, fortgeschrittene Themen und Best Practices', rating: 5,
                 thumbnails: [{
                     url: 'https://ng-buch.de/angular-cover.jpg', title: 'Buchcover' }],
@@ -40,7 +40,7 @@ module.exports = function () {
             {   id: 554543654, 
                 isbn: 554543654, 
                 title: "React", 
-                authors: [{author: 'Oliver Zeigermann'}, {author: 'Nils Hartmann'}], 
+                authors: ['Oliver Zeigermann', 'Nils Hartmann'], 
                 published: new Date(2019, 11, 12), 
                 subtitle: 'Grundlagen, fortgeschrittene Themen, Praxistipps', rating: 4,
                 thumbnails: [{

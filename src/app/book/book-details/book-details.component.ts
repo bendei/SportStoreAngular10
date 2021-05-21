@@ -47,14 +47,24 @@ export class BookDetailsComponent implements OnInit {
       // vagy ugyanez 
       sellers: this.fb.array( (!book || !book?.sellers) ? [] : this.createSellerGroups(book.sellers) ), // array of FormGroups containing FormControll objects
       //authors: this.fb.array( (!book || !book?.authors) ? [] : this.buildAuthorsArray(book.authors) )
-      authors: new FormArray([
-        new FormControl('qqq'),
-        new FormControl('dddd'),
-        new FormControl('fggg'),
-      ])
+      authors: this.createAuthorsArray(["1","2"])
     });
   }
 
+  createAuthorsArray(values: string[]): FormArray {
+    // return new FormArray([
+    //   new FormControl('qqq'),
+    //   new FormControl('dddd'),
+    //   new FormControl('fggg'),
+    // ])
+
+    let array: FormArray = new FormArray([]);
+    values.forEach(v => {
+      array.push(new FormControl(v));
+    });
+
+    return array;
+  }
  
 
   createSellerGroups(sellers: BookSeller[]): FormGroup[] {
