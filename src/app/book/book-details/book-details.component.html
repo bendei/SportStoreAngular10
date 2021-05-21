@@ -1,7 +1,7 @@
-<div class="m-2">
+<div class="m-2 col-8">
     <form class="form" [formGroup]="bookForm" (ngSubmit)="submitForm()">
         <div class="form-group">
-            <label>ISBN hahahah Hotfix 1 v1.1:</label>
+            <label>ISBN:</label>
             <input type="text" formControlName="isbn" class="form-control">
         </div>
 
@@ -26,45 +26,42 @@
         </div> -->
 
 
-        <!-- <div class="form-group">
-            <label>Authors</label>
-            <div formArrayName="authors" *ngFor="let au of bookForm.get('authors')['controls']; let in = index;">
-                {{au.value}}
-                <input formControlName="in" placeholder={{au.value}}>
-            </div>
-        </div> -->
-
+       <div formArrayName="authors">
+            <input type="text" *ngFor="let a of bookForm.get('authors')['controls']; index as i" [formControlName]="i" >
+       </div>
+     
+      
         <button type="button" class="btn btn-secondary m-1"  [style.max-width.px]="180"  (click)="addSeller()">Add new Seller</button>
 
         <div *ngIf="book?.sellers">
             <!-- Fejléc -->
             <div class="row  gy-1" >   <!--  nem biztos hogy a jsonban van ilyen property -->
-                <div class="col-2">
+                <div class="col-3">
                     Name
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     Address
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     Quantity
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     &nbsp;
                 </div>           
             </div>
 
-            <div formArrayName="sellers" *ngFor="let seller of bookForm.get('sellers')['controls']; let i = index;">    <!-- a sellers FormArray-n mint FormControll elemeket iterálunk végig -->
+            <div formArrayName="sellers" *ngFor="let seller of bookForm.get('sellers').controls; let i = index;">    <!-- a sellers FormArray-n mint FormControll elemeket iterálunk végig -->
                 <div [formGroupName]="i" class="row gy-1 mb-2">
-                    <div class="col-2">
-                         <input formControlName="name" >
+                    <div class="col-3">
+                         <input id="hobby_name_{{i}}" formControlName="name" >
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                          <input formControlName="address" >
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                          <input formControlName="quantity" >
                     </div>
-                    <div class="col-2">                       
+                    <div class="col-3">                       
                             <button type="button" class="btn btn-secondary" [style.max-width.px]="120" (click)="deleteSeller(i)">Delete Seller</button>
                     </div>
                 </div>

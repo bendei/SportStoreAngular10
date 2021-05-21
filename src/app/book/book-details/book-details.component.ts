@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {Modes} from "../../shared/app-enums";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {BookRepository} from "../shared/book.repository";
-import { Book, BookSeller } from '../shared/book';
+import { Author, Book, BookSeller } from '../shared/book';
  
 
 @Component({
@@ -45,9 +45,17 @@ export class BookDetailsComponent implements OnInit {
       rating: [book?.rating],
       //sellers: (book === undefined || book.sellers === undefined )? [] : this.fb.array(this.createSellerGroups(book?.sellers))
       // vagy ugyanez 
-       sellers: this.fb.array( (!book || !book?.sellers) ? [] : this.createSellerGroups(book.sellers) ) // array of FormControll objects
+      sellers: this.fb.array( (!book || !book?.sellers) ? [] : this.createSellerGroups(book.sellers) ), // array of FormGroups containing FormControll objects
+      //authors: this.fb.array( (!book || !book?.authors) ? [] : this.buildAuthorsArray(book.authors) )
+      authors: new FormArray([
+        new FormControl('qqq'),
+        new FormControl('dddd'),
+        new FormControl('fggg'),
+      ])
     });
   }
+
+ 
 
   createSellerGroups(sellers: BookSeller[]): FormGroup[] {
     let sellerGroups: FormGroup[] = [];
@@ -67,6 +75,8 @@ export class BookDetailsComponent implements OnInit {
      })
   }
 
+ 
+
   addSeller() {
     const sellers = this.bookForm.get("sellers") as FormArray;
     sellers.push(this.createSellerGroup());
@@ -83,6 +93,8 @@ export class BookDetailsComponent implements OnInit {
 
       // kiszűrni ha a user üres seller sorokat adott hozzá
      const sellers = this.bookForm.value.sellers.filter((seller: BookSeller) => (seller.address != null && seller.name != null && seller.quantity != 0));
+
+     
 
       const mybook: Book = {
         ...this.bookForm.value,
