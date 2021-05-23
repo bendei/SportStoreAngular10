@@ -27,8 +27,8 @@ module.exports = function () {
             {   id: 34324233, 
                 isbn: 34324233, 
                 sellers: [
-                    {name: 'Bende seller', address: 'sáky u 7a', quantity: 33000},
-                    {name: 'Sasform Agrotechnika Kft.', address: 'Felsőszéktó 86', quantity: 12000}
+                    {name: 'Bende seller', address: 'sáky u 7a', quantity: 33000, age: 49, birthYear: 1972},
+                    {name: 'Sasform Agrotechnika Kft.', address: 'Felsőszéktó 86', quantity: 12000, age: 40, birthYear: 1981}
                     ],
                 title: "Angular 11", 
                 authors: ['Ferdinand Malcher', 'Johannes Hoppe', 'Danny Koppenhagen'], 

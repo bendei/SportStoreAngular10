@@ -17,8 +17,6 @@ export interface BookSeller {
     name: string;
     address: string;
     quantity: number;
-}
-
-export interface Author {
-    name: string;
+    age: number;
+    birthYear: number;
 }
