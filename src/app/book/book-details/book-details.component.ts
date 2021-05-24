@@ -45,8 +45,9 @@ export class BookDetailsComponent implements OnInit {
       rating: [book?.rating, Validators.minLength(3)],
       //sellers: (book === undefined || book.sellers === undefined )? [] : this.fb.array(this.createSellerGroups(book?.sellers))
       // vagy ugyanez 
-      sellers: this.fb.array( (!book || !book?.sellers) ? [] : this.createSellerArray(book.sellers) ), // array of FormGroups containing FormControll objects
-      authors: ( (!book || !book?.authors) ? [] : this.createAuthorsArray(book.authors))
+      sellers: this.fb.array( (!book || !book?.sellers) ? [] : this.createSellerArray(book.sellers), {validators: BookValidator.ageAndYearCorrect} ), // array of FormGroups containing FormControll objects
+      authors: ( (!book || !book?.authors) ? [] : this.createAuthorsArray(book.authors))  //itt mivel nem gropuba hanem egyből FormControllert
+      // használok nem megy valamiért a FormBuilder.array, helyette manuálisan állitom össze!
     });
   }
 
@@ -83,7 +84,7 @@ export class BookDetailsComponent implements OnInit {
       quantity: s?.quantity,
       age:  s?.age,
       birthYear: s?.birthYear
-     })
+     }, {validators: BookValidator.ageAndYearCorrect})
   }
 
   addSeller() {
@@ -97,23 +98,22 @@ export class BookDetailsComponent implements OnInit {
   }
 
   addAuthor() {
-
+    this.authors.push(new FormControl(''));
   }
 
   submitForm() {
-
-    console.table(this.bookForm.get("rating"));
-
     if(this.bookForm.valid) {
 
       // kiszűrni ha a user üres seller sorokat adott hozzá
      const sellers = this.bookForm.value.sellers.filter((seller: BookSeller) => (seller.address != null && seller.name != null && seller.quantity != 0));
-     
+     const authors = this.bookForm.value.authors;
 
       const mybook: Book = {
         ...this.bookForm.value,
         id: this.bookForm.get("isbn").value,
-        sellers
+        isbn: this.bookForm.get("isbn").value,
+        sellers,
+        authors
       };
 
       if(this.modes == Modes.edit) {

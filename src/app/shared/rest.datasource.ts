@@ -35,22 +35,22 @@ export class RestDataSource {
         return this.http.get<Product[]>(`${api}/products`,  this.createOptions()) // !!! get<Product[]> dieses wird vom Server geschickt
         .pipe(
             retry(3),
-                map(rawProducts => rawProducts
-                   .map(prod => // javascript: implicit return: ha csak 1 sorból áll a function body
-                        // lent: ha objektumot adunk vissza akkor () köé kell tenni
-                        //({id: 2312312, name: "nnn", category: "cat", description: "de", price: 33, releaseDate: new Date()})
+            map(rawProducts => rawProducts
+                .map(prod => // javascript: implicit return: ha csak 1 sorból áll a function body
+                    // lent: ha objektumot adunk vissza akkor () köé kell tenni
+                    //({id: 2312312, name: "nnn", category: "cat", description: "de", price: 33, releaseDate: new Date()})
 
-                    ProductFactory.convertRawToProduct(prod)    //miért nem lehet itt return statement használni?
-                                                                // !!! megnézni hogy hogyan mapeljük ha több json tokenbő áll a válasz nem csak egyből
-                                                                // https://stackoverflow.com/questions/66018616/how-can-i-use-map-operator-to-add-a-new-field-to-an-object-into-an-array-returne
+                ProductFactory.convertRawToProduct(prod)    //miért nem lehet itt return statement használni?
+                                                            // !!! megnézni hogy hogyan mapeljük ha több json tokenbő áll a válasz nem csak egyből
+                                                            // https://stackoverflow.com/questions/66018616/how-can-i-use-map-operator-to-add-a-new-field-to-an-object-into-an-array-returne
 
 
-                    )
-                ),
-                // a catchError operator átad egy error objektumot a callbacként megadott functionnak: ezt mi loggolhatjuk tovább dobhatjuk stb.
-                //catchError(error => of<any>('hahah'))                // catchError szintén egy Observable-t adi vissza, méghozzá Product[] tipusút
-                catchError((err: Response) => throwError(` http status code: ${err.status} - ${err.statusText} - ${err.url}`) )
-              );
+                )
+            ),
+            // a catchError operator átad egy error objektumot a callbacként megadott functionnak: ezt mi loggolhatjuk tovább dobhatjuk stb.
+            //catchError(error => of<any>('hahah'))                // catchError szintén egy Observable-t adi vissza, méghozzá Product[] tipusút
+            catchError((err: Response) => throwError(` http status code: ${err.status} - ${err.statusText} - ${err.url}`) )
+            );
     }
 
     getBook(id: string): Observable<Book> {
