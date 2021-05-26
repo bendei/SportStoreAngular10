@@ -6,6 +6,7 @@ import localeHu from '@angular/common/locales/hu';
 import { registerLocaleData } from '@angular/common';  
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 
 // class
 import {AppErrorHandler} from "../app/shared/AppErrorHandler";
@@ -25,6 +26,7 @@ import {AppRoutingModule} from "./app-routing.module";
 
 // services
 import { StoreGuard } from "./authentication/store.guard";
+import { TokenInterceptor} from "../app/shared/token.interceptor";
 
 
 registerLocaleData(localeFr, 'fr');
@@ -43,7 +45,8 @@ registerLocaleData(localeHu, 'hu');
   ],
   providers: [StoreGuard, 
     {provide: LOCALE_ID, useValue: "hu_HU"},
-    {provide: ErrorHandler, useClass: AppErrorHandler}  // custom error handling
+    {provide: ErrorHandler, useClass: AppErrorHandler},  // custom error handling
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}  // token interceptior
     ],
   bootstrap: [AppComponent]
 })

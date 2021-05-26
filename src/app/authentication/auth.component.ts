@@ -19,8 +19,7 @@ import { AuthService } from "./auth.service";
         if (form.valid) {
             this.authService.authenticate(this.username, this.password).subscribe(response => {
                 if(response) {
-                    this.authenticated = response;
-                    
+                    this.authenticated = response;                    
                     this.router.navigateByUrl("/home");
                 } else {
                     this.errorMsg = "You are unathorized";
