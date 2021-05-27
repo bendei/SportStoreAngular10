@@ -27,6 +27,7 @@ import {AppRoutingModule} from "./app-routing.module";
 // services
 import { StoreGuard } from "./authentication/store.guard";
 import { TokenInterceptor} from "../app/shared/token.interceptor";
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -41,12 +42,14 @@ registerLocaleData(localeHu, 'hu');
     BrowserModule, RouterModule, ReactiveFormsModule,
     AuthenticationModule, 
     AppRoutingModule, 
-    StoreModule, BookModule, InputOutputModule
+    StoreModule, BookModule, InputOutputModule,
+    LoggerModule.forRoot({serverLoggingUrl: 'http://localhost:3500/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
   ],
   providers: [StoreGuard, 
     {provide: LOCALE_ID, useValue: "hu_HU"},
     {provide: ErrorHandler, useClass: AppErrorHandler},  // custom error handling
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}  // token interceptior
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true} // token interceptior
+     
     ],
   bootstrap: [AppComponent]
 })

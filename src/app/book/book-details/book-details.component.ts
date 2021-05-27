@@ -5,6 +5,7 @@ import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validat
 import {BookRepository} from "../shared/book.repository";
 import { Book, BookSeller } from '../shared/book';
 import {BookValidator} from "../../validators/BookValidator";
+import { NGXLogger } from 'ngx-logger';
  
 @Component({
   selector: 'app-book-details',
@@ -18,12 +19,14 @@ export class BookDetailsComponent implements OnInit {
   bookForm: FormGroup;
   book: Book;
 
-  constructor(private router: Router, private activeRoute: ActivatedRoute, private fb: FormBuilder, private bookRepo: BookRepository) {
+  constructor(private router: Router, private activeRoute: ActivatedRoute, private fb: FormBuilder, private bookRepo: BookRepository, private logger: NGXLogger) {
     this.modes = Number(activeRoute.snapshot.paramMap.get("mode"));
    }
 
   ngOnInit(): void {
    this.initForm();  // meg kell hivni mert a template már renderelve lehet mire a REST response megjön és a [fromGroup] egy undefined objectre mutat
+
+   this.logger.error("logging BookDetailsComponent");
 
    if (this.modes === Modes.edit) {
       const id = this.activeRoute.snapshot.paramMap.get("id");

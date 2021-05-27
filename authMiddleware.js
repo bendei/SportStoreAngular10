@@ -6,7 +6,7 @@ const PASSWORD = "a";
 
 const mappings = {
     get: ["/api/orders", "/orders","/api/products","/products", "/books", "/api/books"],
-    post: ["/api/products", "/products", "/api/categories", "/categories"],
+    post: ["/api/products", "/products", "/api/categories", "/categories", "/api/logs", "/logs"],
     delete: ["/api/products","/api/products"],
     put: ["/api/products","/products", "/api/orders", "/orders"],
 }
@@ -17,7 +17,15 @@ function requiresAuth(method, url) {
 }
 
 module.exports = function (req, res, next) {
-    if (req.url.endsWith("/login") && req.method == "POST") {
+
+    console.log("request url:", req.url);
+
+    if (req.url.endsWith("/logs") && req.method == "POST") {
+        console.log("Logging received from Angular:");
+        console.log(req.body);
+    }
+
+    else if (req.url.endsWith("/login") && req.method == "POST") {
         if (req.body && req.body.name == USERNAME && req.body.password == PASSWORD) {
             let token = jwt.sign({ data: USERNAME, expiresIn: "1h" }, APP_SECRET);
             res.json({ success: true, token: token });
