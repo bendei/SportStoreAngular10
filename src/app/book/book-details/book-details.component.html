@@ -38,44 +38,44 @@
         <div *ngIf="book?.sellers">
             <!-- Fejléc -->
             <div class="row  gy-1" >   <!--  nem biztos hogy a jsonban van ilyen property -->
-                <div class="col-2">
+                <div class="col-2 m-1">
                     Name
                 </div>
-                <div class="col-2">
+                <div class="col-2 m-1">
                     Address
                 </div>
-                <div class="col-2">
+                <div class="col-2 m-1">
                     Quantity
                 </div>
-                <div class="col-2">
+                <div class="col-2 m-1">
                     Age
                 </div>
-                <div class="col-2">
+                <div class="col-2 m-1">
                     BirthYear
                 </div>
-                <div class="col-2">
+                <div class="col-2 m-1">
                     &nbsp;
                 </div>           
             </div>
 
             <div formArrayName="sellers" *ngFor="let seller of sellers; let i = index;">    <!-- a sellers FormArray-n mint FormControll elemeket iterálunk végig -->
                 <div [formGroupName]="i" class="row gy-1">
-                    <div class="col-2">
+                    <div class="col-2  m-1">
                          <input id="hobby_name_{{i}}" formControlName="name" >
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 m-1">
                          <input formControlName="address" >
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 m-1">
                          <input formControlName="quantity" >
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 m-1">
                         <input formControlName="age" >
                    </div>
-                   <div class="col-2">
+                   <div class="col-2 m-1">
                         <input formControlName="birthYear" >
                    </div>
-                    <div class="col-2">                       
+                    <div class="col-2 m-1">                       
                             <button type="button" class="btn btn-secondary" [style.max-width.px]="120" (click)="deleteSeller(i)">Delete Seller</button>
                     </div>
                     <br/>          
