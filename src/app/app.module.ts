@@ -29,6 +29,9 @@ import { StoreGuard } from "./authentication/store.guard";
 import { TokenInterceptor} from "../app/shared/token.interceptor";
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
+// PrimeNG
+import {InputTextModule} from 'primeng/inputtext';
+
 
 registerLocaleData(localeFr, 'fr');
 registerLocaleData(localeHu, 'hu');
@@ -43,7 +46,7 @@ registerLocaleData(localeHu, 'hu');
     AuthenticationModule, 
     AppRoutingModule, 
     StoreModule, BookModule, InputOutputModule,
-    LoggerModule.forRoot({serverLoggingUrl: 'http://localhost:3500/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
+    LoggerModule.forRoot({serverLoggingUrl: 'http://localhost:3500/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
   ],
   providers: [StoreGuard, 
     {provide: LOCALE_ID, useValue: "hu_HU"},
