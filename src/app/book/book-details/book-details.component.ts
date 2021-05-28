@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Modes} from "../../shared/app-enums";
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -6,11 +6,13 @@ import {BookRepository} from "../shared/book.repository";
 import { Book, BookSeller } from '../shared/book';
 import {BookValidator} from "../../validators/BookValidator";
 import { NGXLogger } from 'ngx-logger';
+import {
+  InputText} from 'primeng/inputtext';
  
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
-  styleUrls: ['./book-details.component.css']
+  styleUrls: ['./book-details.component.css'],
 })
 export class BookDetailsComponent implements OnInit {
 
